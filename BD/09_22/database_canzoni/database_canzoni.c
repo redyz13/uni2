@@ -72,9 +72,6 @@ int main(void) {
     return 0;
 }
 
-void dashboard(void) {
-}
-
 int inserisci_canzone(char *nome_canzone, char *nome_artista) {
     FILE *fp;
 
