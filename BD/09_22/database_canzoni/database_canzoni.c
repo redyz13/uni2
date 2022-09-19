@@ -1,74 +1,103 @@
 #include <stdio.h>
 #include <string.h>
 
-void dashboard(void);
-void inserisci_canzone(void);
-void visualizza_canzoni(void);
-void modifica_nome(void);
-void cancella_artista(void);
+int inserisci_canzone(char *nome_canzone, char *nome_artista);
+int visualizza_canzoni(char *nome_ricerca);
+int modifica_nome(char *nome_vecchio, char *nome_nuovo);
+int cancella_artista(char *nome_rimozione);
 void leggi_stringa(char *s, int buff);
 
 int main(void) {
-    while (!feof(stdin))
-        dashboard();
+    while (!feof(stdin)) {
+        printf("1. Visualizza canzoni artista\n2. Inserisci canzone\n");
+        printf("3. Modifica nome artista\n4. Cancella canzoni artista\n[] Premere EOF per uscire\n");
+        printf("\nSelezione: ");
+        char c;
+        scanf("%c", &c);
+        getchar();
+
+        char nome_ricerca[50];
+        char nome_canzone[50];
+        char nome_artista[50];
+        char nome_nuovo[50];
+        char nome_vecchio[50];
+        char nome_rimozione[50];
+
+        switch(c) {
+            case '1':
+                printf("\nInserire il nome dell'artista di cui cercare le canzoni: ");
+                leggi_stringa(nome_ricerca, 50);
+
+                visualizza_canzoni(nome_ricerca);
+
+                break;
+
+            case '2':
+                printf("\nInserire il nome della canzone: ");
+                leggi_stringa(nome_canzone, 50);
+                printf("Inserire il nome dell'artista: ");
+                leggi_stringa(nome_artista, 50);
+
+                if (inserisci_canzone(nome_canzone, nome_artista) == 0)
+                    printf("\nCanzone \"%s\" inserita con successo\n\n", nome_canzone);
+                else
+                    printf("\nIl file non può essere né aperto né creato\n\n");
+
+                break;
+
+            case '3':
+                printf("\nInserire il nome dell'artista da modificare: ");
+                leggi_stringa(nome_vecchio, 50);
+                printf("Inserire il nuovo nome dell'artista da modificare: ");
+                leggi_stringa(nome_nuovo, 50);
+
+                if (modifica_nome(nome_vecchio, nome_nuovo) == 0)
+                    printf("\nOperazione eseguita\n\n");
+
+                break;
+
+            case '4':
+                printf("\nInserire il nuovo nome dell'artista da rimuovere: ");
+                leggi_stringa(nome_rimozione, 50);
+
+                if (cancella_artista(nome_rimozione) == 0);
+                    printf("\nOperazione eseguita\n\n");
+
+                break;
+
+            default: printf("\nCarattere non valido\n\n");
+        }
+    }
 
     return 0;
 }
 
 void dashboard(void) {
-    printf("1. Visualizza canzoni artista\n2. Inserisci canzone\n");
-    printf("3. Modifica nome artista\n4. Cancella canzoni artista\n[] Premere EOF per uscire\n");
-    printf("\nSelezione: ");
-    char c;
-    scanf("%c", &c);
-    getchar();
-
-    switch(c) {
-        case '1': visualizza_canzoni(); break;
-        case '2': inserisci_canzone(); break;
-        case '3': modifica_nome(); break;
-        case '4': cancella_artista(); break;
-        default: printf("\nCarattere non valido\n\n");
-    }
 }
 
-void inserisci_canzone(void) {
-    char nome_canzone[50];
-    char nome_artista[50];
-
+int inserisci_canzone(char *nome_canzone, char *nome_artista) {
     FILE *fp;
-
-    printf("\nInserire il nome della canzone: ");
-    leggi_stringa(nome_canzone, 50);
-    printf("Inserire il nome dell'artista: ");
-    leggi_stringa(nome_artista, 50);
 
     if ((fp = fopen("archivio.txt", "a")) == NULL) {
         printf("\nIl file non può essere né aperto né creato\n\n");
-        return;
+        return -1;
     }
     else {
-        printf("Inserisco la prima riga con la canzone %s\n", nome_canzone);
         fprintf(fp, "%s\t %s\n", nome_canzone, nome_artista);
         fclose(fp);
-        printf("\nCanzone \"%s\" inserita con successo\n\n", nome_canzone);
-        return;
+        return 0;
     }
 }
 
-void visualizza_canzoni(void) {
+int visualizza_canzoni(char *nome_ricerca) {
     char nome_canzone[50];
     char nome_artista[50];
-    char nome_ricerca[50];
 
     FILE *fp;
 
-    printf("\nInserire il nome dell'artista di cui cercare le canzoni: ");
-    leggi_stringa(nome_ricerca, 50);
-
     if ((fp = fopen("archivio.txt", "r")) == NULL) {
         printf("\nIl file non può essere aperto\n\n");
-        return;
+        return -1;
     }
     else {
         printf("\nCanzoni dell'artista \"%s\":\n", nome_ricerca);
@@ -80,8 +109,98 @@ void visualizza_canzoni(void) {
 
         fclose(fp);
         putchar('\n');
-        return;
+        return 0;
     }
+}
+
+int modifica_nome(char *nome_vecchio, char *nome_nuovo) {
+    char nome_canzone[50];
+    char nome_artista[50];
+
+    FILE *fp;
+    FILE *ftmp;
+
+    if ((fp = fopen("archivio.txt", "r")) == NULL) {
+        printf("\nIl file non può essere aperto\n\n");
+        return -1;
+    }
+    else {
+        if ((ftmp = fopen("temp.txt", "w")) == NULL) {
+            printf("Il file non può essere creato\n");
+            return -1;
+        }
+        else {
+            fscanf(fp, "%s%s", nome_canzone, nome_artista);
+
+            printf("\nCanzoni a cui è stato sostuito l'artista:\n");
+
+            while (!feof(fp)) {
+
+                if (strcmp(nome_vecchio, nome_artista) == 0) {
+                    printf("-- %s\n", nome_canzone);
+                    fprintf(ftmp, "%s\t %s\n", nome_canzone, nome_nuovo);
+                }
+                else
+                    fprintf(ftmp, "%s\t %s\n", nome_canzone, nome_artista);
+
+                fscanf(fp, "%s%s", nome_canzone, nome_artista);
+            }
+
+            fclose(ftmp);
+        }
+
+        fclose(fp);
+    }
+
+    remove("archivio.txt");
+    rename("temp.txt", "archivio.txt");
+
+    return 0;
+}
+
+int cancella_artista(char *nome_rimozione) {
+    char nome_canzone[50];
+    char nome_artista[50];
+
+    FILE *fp;
+    FILE *ftmp;
+
+    if ((fp = fopen("archivio.txt", "r")) == NULL) {
+        printf("\nIl file non può essere aperto\n\n");
+        return -1;
+    }
+    else {
+        if ((ftmp = fopen("temp.txt", "w")) == NULL) {
+            printf("Il file non può essere creato\n");
+            return -1;
+        }
+        else {
+            fscanf(fp, "%s%s", nome_canzone, nome_artista);
+
+            printf("\nArtista cancellato: %s\n", nome_rimozione);
+            printf("Canzoni cancellate:\n");
+
+            while (!feof(fp)) {
+                if (strcmp(nome_rimozione, nome_artista) == 0) {
+                    printf("-- %s\n", nome_canzone);
+                    fscanf(fp, "%s%s", nome_canzone, nome_artista);
+                }
+                else {
+                    fprintf(ftmp, "%s\t %s\n", nome_canzone, nome_artista);
+                    fscanf(fp, "%s%s", nome_canzone, nome_artista);
+                }
+            }
+
+            fclose(ftmp);
+        }
+
+        fclose(fp);
+    }
+
+    remove("archivio.txt");
+    rename("temp.txt", "archivio.txt");
+
+    return 0;
 }
 
 void leggi_stringa(char *s, int buff) {
@@ -92,93 +211,4 @@ void leggi_stringa(char *s, int buff) {
             s[i++] = ch;
 
     s[i] = '\0';
-}
-
-void modifica_nome(void) {
-    char nome_canzone[50];
-    char nome_artista[50];
-    char nome_nuovo[50];
-    char nome_vecchio[50];
-
-    FILE *fp;
-    FILE *ftmp;
-
-    printf("\nInserire il nome dell'artista da modificare: ");
-    leggi_stringa(nome_vecchio, 50);
-    printf("Inserire il nuovo nome dell'artista da modificare: ");
-    leggi_stringa(nome_nuovo, 50);
-
-    if ((fp = fopen("archivio.txt", "r")) == NULL) {
-        printf("\nIl file non può essere aperto\n\n");
-        return;
-    }
-    else {
-        if ((ftmp = fopen("temp.txt", "w")) == NULL) {
-            printf("Il file non può essere creato\n");
-            return;
-        }
-        else {
-            fscanf(fp, "%s%s", nome_canzone, nome_artista);
-
-            while (!feof(fp)) {
-                if (strcmp(nome_vecchio, nome_artista) == 0)
-                    fprintf(ftmp, "%s\t %s\n", nome_canzone, nome_nuovo);
-                else
-                    fprintf(ftmp, "%s\t %s\n", nome_canzone, nome_artista);
-
-                fscanf(fp, "%s%s", nome_canzone, nome_artista);
-            }
-
-            fclose(ftmp);
-        }
-
-        printf("\nOperazione eseguita\n\n");
-        fclose(fp);
-    }
-
-    remove("archivio.txt");
-    rename("temp.txt", "archivio.txt");
-}
-
-void cancella_artista(void) {
-    char nome_canzone[50];
-    char nome_artista[50];
-    char nome_rimozione[50];
-
-    FILE *fp;
-    FILE *ftmp;
-
-    printf("\nInserire il nuovo nome dell'artista da rimuovere: ");
-    leggi_stringa(nome_rimozione, 50);
-
-    if ((fp = fopen("archivio.txt", "r")) == NULL) {
-        printf("\nIl file non può essere aperto\n\n");
-        return;
-    }
-    else {
-        if ((ftmp = fopen("temp.txt", "w")) == NULL) {
-            printf("Il file non può essere creato\n");
-            return;
-        }
-        else {
-            fscanf(fp, "%s%s", nome_canzone, nome_artista);
-
-            while (!feof(fp)) {
-                if (strcmp(nome_rimozione, nome_artista) == 0)
-                    fscanf(fp, "%s%s", nome_canzone, nome_artista);
-                else
-                    fprintf(ftmp, "%s\t %s\n", nome_canzone, nome_artista);
-
-                fscanf(fp, "%s%s", nome_canzone, nome_artista);
-            }
-
-            fclose(ftmp);
-        }
-
-        printf("\nOperazione eseguita\n\n");
-        fclose(fp);
-    }
-
-    remove("archivio.txt");
-    rename("temp.txt", "archivio.txt");
 }
