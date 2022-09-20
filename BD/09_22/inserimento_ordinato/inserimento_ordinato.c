@@ -5,7 +5,7 @@ int insert_into(char *matricola, char *nome, double media_voti);
 void stampa_file(void);
 
 int main(void) {
-    char matricola[4];
+    char matricola[30];
     char nome[50];
     double media_voti;
 
@@ -32,7 +32,7 @@ int main(void) {
 }
 
 int insert_into(char *matricola_new, char *nome_new, double media_voti_new) {
-    char matricola[4];
+    char matricola[30];
     char nome[50];
     double media_voti;
 
@@ -98,7 +98,7 @@ void stampa_file(void) {
     if ((f_in = fopen("studentiOrd.txt", "r")) == NULL)
         return;
     else {
-        char matricola[4];
+        char matricola[30];
         char nome[50];
         double media_voti;
 
