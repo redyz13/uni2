@@ -5,7 +5,7 @@ int insert_into(char *matricola, char *nome, double media_voti);
 void stampa_file(void);
 
 int main(void) {
-    char matricola[3];
+    char matricola[4];
     char nome[50];
     double media_voti;
 
@@ -32,7 +32,7 @@ int main(void) {
 }
 
 int insert_into(char *matricola_new, char *nome_new, double media_voti_new) {
-    char matricola[3];
+    char matricola[4];
     char nome[50];
     double media_voti;
 
@@ -98,13 +98,14 @@ void stampa_file(void) {
     if ((f_in = fopen("studentiOrd.txt", "r")) == NULL)
         return;
     else {
-        char matricola[3];
+        char matricola[4];
         char nome[50];
         double media_voti;
 
         while (!feof(f_in)) {
             fscanf(f_in, "%s%s%lf", matricola, nome, &media_voti);
-            printf("%s\t %s\t %lf\n", matricola, nome, media_voti);
+            if (!feof(f_in))
+                printf("%s\t %s\t %lf\n", matricola, nome, media_voti);
         }
     }
 
