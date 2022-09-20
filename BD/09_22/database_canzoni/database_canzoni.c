@@ -60,7 +60,7 @@ int main(void) {
                 printf("\nInserire il nuovo nome dell'artista da rimuovere: ");
                 leggi_stringa(nome_rimozione, 50);
 
-                if (cancella_artista(nome_rimozione) == 0);
+                if (cancella_artista(nome_rimozione) == 0)
                     printf("\nOperazione eseguita\n\n");
 
                 break;
