@@ -16,10 +16,11 @@ int main(void) {
     char nome_rimozione[30];
     char nome_file[30];
 
+    FILE *f;
+
     printf("Inserisci il nome del file contenente il database di canzoni: ");
     leggi_stringa(nome_file, 30);
 
-    FILE *f;
     if ((f = fopen(nome_file, "a")) == NULL) {
         printf("\nErrore di lettura o creazione file");
         return -1;
