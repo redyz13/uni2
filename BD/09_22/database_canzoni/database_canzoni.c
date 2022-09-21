@@ -40,8 +40,6 @@ int main(void) {
 
                 if (inserisci_canzone(nome_canzone, nome_artista) == 0)
                     printf("\nCanzone \"%s\" inserita con successo\n\n", nome_canzone);
-                else
-                    printf("\nIl file non può essere né aperto né creato\n\n");
 
                 break;
 
@@ -74,12 +72,36 @@ int main(void) {
 
 int inserisci_canzone(char *nome_canzone, char *nome_artista) {
     FILE *fp;
+    char nome_canzone_lettura[50];
+    char nome_artista_lettura[50];
 
-    if ((fp = fopen("archivio.txt", "a")) == NULL) {
-        printf("\nIl file non può essere né aperto né creato\n\n");
-        return -1;
+    if ((fp = fopen("archivio.txt", "r")) == NULL) {
+        if ((fp = fopen("archivio.txt", "w")) == NULL) {
+            printf("\nIl file non può essere né aperto né creato\n\n");
+            return -1;
+        }
+
+        fprintf(fp, "%s\t %s\n", nome_canzone, nome_artista);
+        fclose(fp);
+        return 0;
     }
     else {
+        while (!feof(fp)) {
+            fscanf(fp, "%s%s", nome_canzone_lettura, nome_artista_lettura);
+            if (strcmp(nome_canzone_lettura, nome_canzone) == 0 && strcmp(nome_artista_lettura, nome_artista) == 0) {
+                fclose(fp);
+                printf("\nCanzone già esistente\n\n");
+                return -1;
+            }
+        }
+
+        fclose(fp);
+
+        if ((fp = fopen("archivio.txt", "a")) == NULL) {
+            printf("\nIl file non può essere né aperto né creato\n\n");
+            return -1;
+        }
+
         fprintf(fp, "%s\t %s\n", nome_canzone, nome_artista);
         fclose(fp);
         return 0;
