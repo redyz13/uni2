@@ -8,20 +8,20 @@ int cancella_artista(char *nome_rimozione);
 void leggi_stringa(char *s, int buff);
 
 int main(void) {
+    char nome_ricerca[50];
+    char nome_canzone[50];
+    char nome_artista[50];
+    char nome_nuovo[50];
+    char nome_vecchio[50];
+    char nome_rimozione[50];
+    char c;
+
     while (!feof(stdin)) {
         printf("1. Visualizza canzoni artista\n2. Inserisci canzone\n");
         printf("3. Modifica nome artista\n4. Cancella canzoni artista\n[] Premere EOF per uscire\n");
         printf("\nSelezione: ");
-        char c;
         scanf("%c", &c);
         getchar();
-
-        char nome_ricerca[50];
-        char nome_canzone[50];
-        char nome_artista[50];
-        char nome_nuovo[50];
-        char nome_vecchio[50];
-        char nome_rimozione[50];
 
         switch(c) {
             case '1':
