@@ -48,7 +48,8 @@ int visualizzaCanzoni(char *nomeFile, char *nomeRicerca) {
     printf("\n[Canzoni dell'artista \"%s\"]\n", nomeRicerca);
 
     while (!feof(fp)) {
-        fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura);
+        if ((fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2)
+            break;
 
         if (strcmp(nomeRicerca, nomeArtistaLettura) == 0) {
             trovate = 1;
