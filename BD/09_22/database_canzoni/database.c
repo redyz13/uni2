@@ -65,6 +65,67 @@ int visualizzaCanzoni(char *nomeFile, char *nomeRicerca) {
     return 1;
 }
 
+static int inserisciDettagli(Artista artista) {
+    FILE *fp;
+    FILE *ftmp;
+    char nomeArtistaLettura[LEN+1];
+    char genereLettura[LEN+1];
+    int gruppoLettura;
+    int anniLettura;
+    int inserito = 0;
+    
+    if ((fp = fopen("dettagliArtisti", "r")) == NULL) return -1;
+    if ((ftmp = fopen("tmp", "w")) == NULL) return -1;
+    
+    char c = fgetc(fp);
+    if (c == EOF) {
+        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int) artista.gruppo,
+                                             artista.anni, artista.genere);
+
+        fclose(fp);
+        fclose(ftmp);
+
+        remove("dettagliArtisti");
+        rename("tmp", "dettagliArtisti");
+
+        return 1;
+    }
+    else rewind(fp);
+
+    while (!feof(fp)) {
+        if (fscanf(fp, "%s%d%d%s", nomeArtistaLettura, &gruppoLettura,
+                                   &anniLettura, genereLettura) != 4)
+            break;
+
+        // Stesso nome artista
+        if (strcmp(artista.nome ,nomeArtistaLettura) == 0) {
+            return 0;
+        }
+        // Il nome dell'artista da aggiungere è più piccolo di quello letto, inserisco quello da aggiungere
+        else if (!inserito && strcmp(artista.nome, nomeArtistaLettura) < 0) {
+            inserito = 1;
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int)artista.gruppo,
+                                                 artista.anni, artista.genere);
+        }
+
+        // Aggiungo dopo la canzone che ho letto dal file
+        fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, (int)gruppoLettura,
+                                             anniLettura, genereLettura);
+    }
+    
+    if (!inserito)
+        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int)artista.gruppo,
+                                             artista.anni, artista.genere);
+
+    fclose(fp);
+    fclose(ftmp);
+
+    remove("dettagliArtisti");
+    rename("tmp", "dettagliArtisti");
+    
+    return 1;
+}
+
 int inserisciCanzone(char *nomeFile, Canzone canzone) {
     FILE *fp;
     FILE *ftmp;
@@ -123,6 +184,11 @@ int inserisciCanzone(char *nomeFile, Canzone canzone) {
 
     remove(nomeFile);
     rename("tmp", nomeFile);
+    
+    if (inserisciDettagli(canzone.artista) < 1)
+        printf("\n[Artista non aggiornato]\n");
+    else
+        printf("\n[Artista aggiunto]\n");
     
     return 1;
 }
