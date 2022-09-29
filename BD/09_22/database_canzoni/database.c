@@ -24,11 +24,15 @@ Canzone creaCanzone(Artista artista, char *titolo) {
 
 int caricaFile(char *nomeFile) {
     FILE *fp;
+    FILE *fd;
     
     if ((fp = fopen(nomeFile, "a")) == NULL)
         return -1;
+    if ((fd = fopen("dettagliArtisti", "a")) == NULL)
+        return -1;
 
     fclose(fp);
+    fclose(fd);
 
     return 1;
 }
@@ -66,6 +70,7 @@ int inserisciCanzone(char *nomeFile, Canzone canzone) {
     FILE *ftmp;
     char nomeArtistaLettura[LEN+1];
     char nomeCanzoneLettura[LEN+1];
+    int inserito = 0;
     
     if ((fp = fopen(nomeFile, "r")) == NULL) return -1;
     if ((ftmp = fopen("tmp", "w")) == NULL) return -1;
@@ -86,21 +91,32 @@ int inserisciCanzone(char *nomeFile, Canzone canzone) {
     else rewind(fp);
 
     while (!feof(fp)) {
-        fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura);
+        if ((fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2)
+            break;
 
-        if (strcmp(canzone.artista.nome ,nomeArtistaLettura) == 0) {
+        // Stesso nome artista
+        if (!inserito && strcmp(canzone.artista.nome ,nomeArtistaLettura) == 0) {
             // Canzone già esistente
             if (strcmp(canzone.titolo, nomeCanzoneLettura) == 0)
                 return 0;
             // Canzone da aggiungere più piccola di quella letta, inserisco quella da aggiungere
             else if (strcmp(canzone.titolo, nomeCanzoneLettura) < 0) {
+                inserito = 1;
                 fprintf(ftmp, "%s\t %s\n", canzone.artista.nome, canzone.titolo);
             }
-
-            // Aggiungo dopo la canzone che ho letto dal file
-            fprintf(ftmp, "%s\t %s\n", nomeArtistaLettura, nomeCanzoneLettura);
         }
+        // Il nome dell'artista da aggiungere è più piccolo di quello letto, inserisco quello da aggiungere
+        else if (!inserito && strcmp(canzone.artista.nome, nomeArtistaLettura) < 0) {
+            inserito = 1;
+            fprintf(ftmp, "%s\t %s\n", canzone.artista.nome, canzone.titolo);
+        }
+
+        // Aggiungo dopo la canzone che ho letto dal file
+        fprintf(ftmp, "%s\t %s\n", nomeArtistaLettura, nomeCanzoneLettura);
     }
+    
+    if (!inserito) 
+        fprintf(ftmp, "%s\t %s\n", canzone.artista.nome, canzone.titolo);
 
     fclose(fp);
     fclose(ftmp);

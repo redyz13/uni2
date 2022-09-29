@@ -40,7 +40,5 @@ Canzone canzoneInput(void) {
     printf("- Inserisci il titolo della canzone: ");
     leggiStringa(titolo, LEN + 1);
 
-    putchar('\n');
-    
     return creaCanzone(artista, titolo);
 }
