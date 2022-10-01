@@ -209,3 +209,76 @@ int inserisciCanzone(char *nomeFile, Canzone canzone) {
     
     return 1;
 }
+
+static int modificaDettagli(char *nomeVecchio, char *nomeNuovo) {
+    FILE *fp;
+    FILE *ftmp;
+    char nomeArtistaLettura[LEN+1];
+    char genereLettura[LEN+1];
+    int gruppoLettura;
+    int anniLettura;
+    
+    if ((fp = fopen("dettagliArtisti", "r")) == NULL) return -1;
+    if ((ftmp = fopen("tmp", "w")) == NULL) return -1;
+
+    while (!feof(fp)) {
+        if (fscanf(fp, "%s%d%d%s", nomeArtistaLettura, &gruppoLettura,
+                   &anniLettura, genereLettura) != 4)
+            break;
+
+        if (strcmp(nomeVecchio, nomeArtistaLettura) == 0)
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeNuovo, (int)gruppoLettura,
+                    anniLettura, genereLettura);
+        else
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, (int)gruppoLettura,
+                    anniLettura, genereLettura);
+    }
+
+    fclose(fp);
+    fclose(ftmp);
+
+    remove("dettagliArtisti");
+    rename("tmp", "dettagliArtisti");
+    
+    return 1;
+}
+
+int modificaNome(char *nomeFile, char *nomeVecchio, char *nomeNuovo) {
+    FILE *fp;
+    FILE *ftmp;
+    char nomeArtistaLettura[LEN+1];
+    char nomeCanzoneLettura[LEN+1];
+    int trovato = 0;
+
+    if ((fp = fopen(nomeFile, "r")) == NULL) return -1;
+    if ((ftmp = fopen("tmp", "w")) == NULL) return -1;
+    
+    while (!feof(fp)) {
+        if ((fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2)
+            break;
+
+        if (strcmp(nomeVecchio, nomeArtistaLettura) == 0) {
+            if (!trovato) printf("\n[Canzoni a cui è stato sostuito l'artista]\n");
+            trovato = 1;
+            printf("- %s\n", nomeCanzoneLettura);
+            fprintf(ftmp, "%s\t %s\n", nomeNuovo, nomeCanzoneLettura);
+        }
+        else
+            fprintf(ftmp, "%s\t %s\n", nomeArtistaLettura, nomeCanzoneLettura);
+    }
+
+    fclose(fp);
+    fclose(ftmp);
+
+    remove(nomeFile);
+    rename("tmp", nomeFile);
+
+    if (trovato) {
+        if (modificaDettagli(nomeVecchio, nomeNuovo) < 1)
+            printf("\n[Artista non aggiornato]\n");
+        else
+            printf("\n[Artista aggiornato]\n");
+    }
+    
+    return trovato;
+}

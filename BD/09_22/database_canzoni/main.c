@@ -16,6 +16,8 @@ int main(void) {
     printf("\n[File <%s> caricato]\n\n", nomeFile);
     
     char nomeRicerca[LEN+1];
+    char nomeVecchio[LEN+1];
+    char nomeNuovo[LEN+1];
     Canzone canzone;
     int eseguito;
     char c;
@@ -50,12 +52,31 @@ int main(void) {
 
                 if (eseguito)
                     printf("\n[Canzone \"%s\" inserita con successo]\n\n", canzone.titolo);
-                else if (eseguito < 0)
-                    printf("\n[Il file non può essere aperto]\n\n");
                 else if (eseguito == 0)
                     printf("\n[Canzone già esistente]\n\n");
+                else if (eseguito < 0)
+                    printf("\n[Il file non può essere aperto]\n\n");
 
                 break;
+            
+            case '3':
+                printf("\n- Inserire il nome dell'artista da modificare: ");
+                leggiStringa(nomeVecchio, LEN+1);
+                printf("- Inserire il nuovo nome dell'artista da modificare: ");
+                leggiStringa(nomeNuovo, LEN+1);
+                
+                eseguito = modificaNome(nomeFile, nomeVecchio, nomeNuovo);
+
+                if (eseguito)
+                    printf("\n[Operazione eseguita]\n\n");
+                else if (eseguito == 0)
+                    printf("\n[Artista non trovato]\n\n");
+                else if (eseguito < 0)
+                    printf("\n[Il file non può essere aperto]\n\n");
+
+                break;
+
+            default: printf("\n[Carattere non valido]\n\n");
         }
 
     } while (c != '0');

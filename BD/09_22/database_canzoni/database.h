@@ -23,3 +23,5 @@ int caricaFile(char *nomeFile);
 int visualizzaCanzoni(char *nomeFile, char *nomeRicerca);
 
 int inserisciCanzone(char *nomeFile, Canzone canzone);
+
+int modificaNome(char *nomeFile, char *nomeVecchio, char *nomeNuovo);
