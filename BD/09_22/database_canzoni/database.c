@@ -80,8 +80,8 @@ static int inserisciDettagli(Artista artista) {
     
     char c = fgetc(fp);
     if (c == EOF) {
-        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int) artista.gruppo,
-                                             artista.anni, artista.genere);
+        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int)artista.gruppo,
+                artista.anni, artista.genere);
 
         fclose(fp);
         fclose(ftmp);
@@ -95,7 +95,7 @@ static int inserisciDettagli(Artista artista) {
 
     while (!feof(fp)) {
         if (fscanf(fp, "%s%d%d%s", nomeArtistaLettura, &gruppoLettura,
-                                   &anniLettura, genereLettura) != 4)
+                   &anniLettura, genereLettura) != 4)
             break;
 
         // Stesso nome artista
@@ -106,17 +106,17 @@ static int inserisciDettagli(Artista artista) {
         else if (!inserito && strcmp(artista.nome, nomeArtistaLettura) < 0) {
             inserito = 1;
             fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int)artista.gruppo,
-                                                 artista.anni, artista.genere);
+                    artista.anni, artista.genere);
         }
 
         // Aggiungo dopo la canzone che ho letto dal file
         fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, (int)gruppoLettura,
-                                             anniLettura, genereLettura);
+                anniLettura, genereLettura);
     }
     
     if (!inserito)
         fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int)artista.gruppo,
-                                             artista.anni, artista.genere);
+                artista.anni, artista.genere);
 
     fclose(fp);
     fclose(ftmp);
