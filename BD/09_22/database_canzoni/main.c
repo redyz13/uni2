@@ -15,8 +15,6 @@ int main(void) {
     
     printf("\n[File <%s> caricato]\n\n", nomeFile);
     
-    char nomeCanzone[LEN+1];
-    char nomeArtista[LEN+1];
     char nomeRicerca[LEN+1];
     Canzone canzone;
     int eseguito;

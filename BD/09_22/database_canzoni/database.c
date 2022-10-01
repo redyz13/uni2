@@ -45,15 +45,31 @@ int visualizzaCanzoni(char *nomeFile, char *nomeRicerca) {
     
     if ((fp = fopen(nomeFile, "r")) == NULL) return -1;
     
-    printf("\n[Canzoni dell'artista \"%s\"]\n", nomeRicerca);
-
     while (!feof(fp)) {
         if ((fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2)
             break;
 
         if (strcmp(nomeRicerca, nomeArtistaLettura) == 0) {
+            if (!trovate) printf("\n[Canzoni dell'artista \"%s\"]\n", nomeRicerca);
             trovate = 1;
-            printf("- %s\n", nomeCanzoneLettura);
+
+            while (strcmp(nomeRicerca, nomeArtistaLettura) == 0) {
+                printf("- %s\n", nomeCanzoneLettura);
+
+                // Per evitare problemi nella lettura dell'ultimo artista
+                if ((fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2) {
+                    fclose(fp);
+                    putchar('\n');
+                    return 1;
+                }
+
+                // Ricerca completata
+                if (strcmp(nomeRicerca, nomeArtistaLettura) != 0) {
+                    fclose(fp);
+                    putchar('\n');
+                    return 1;
+                }
+            }
         }
     }
     
