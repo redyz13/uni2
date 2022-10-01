@@ -2,7 +2,7 @@
 #include <string.h>
 #include "database.h"
 
-Artista creaArtista(char *nome, char *genere, bool gruppo, int anni) {
+Artista creaArtista(char *nome, char *genere, int gruppo, int anni) {
     Artista a;
 
     strcpy(a.nome, nome);
@@ -96,7 +96,7 @@ static int inserisciDettagli(Artista artista) {
     
     char c = fgetc(fp);
     if (c == EOF) {
-        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int)artista.gruppo,
+        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, artista.gruppo,
                 artista.anni, artista.genere);
 
         fclose(fp);
@@ -121,17 +121,17 @@ static int inserisciDettagli(Artista artista) {
         // Il nome dell'artista da aggiungere è più piccolo di quello letto, inserisco quello da aggiungere
         else if (!inserito && strcmp(artista.nome, nomeArtistaLettura) < 0) {
             inserito = 1;
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int)artista.gruppo,
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, artista.gruppo,
                     artista.anni, artista.genere);
         }
 
         // Aggiungo dopo la canzone che ho letto dal file
-        fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, (int)gruppoLettura,
+        fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, gruppoLettura,
                 anniLettura, genereLettura);
     }
     
     if (!inserito)
-        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, (int)artista.gruppo,
+        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, artista.gruppo,
                 artista.anni, artista.genere);
 
     fclose(fp);
@@ -234,10 +234,10 @@ static int modificaDettagli(char *nomeVecchio, char *nomeNuovo) {
             break;
 
         if (strcmp(nomeVecchio, nomeArtistaLettura) == 0)
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeNuovo, (int)gruppoLettura,
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeNuovo, gruppoLettura,
                     anniLettura, genereLettura);
         else
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, (int)gruppoLettura,
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, gruppoLettura,
                     anniLettura, genereLettura);
     }
 
@@ -307,7 +307,7 @@ static int cancellaDettagli(char *nomeRimozione) {
             break;
 
         if (strcmp(nomeRimozione, nomeArtistaLettura) != 0) {
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, (int)gruppoLettura,
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, gruppoLettura,
                     anniLettura, genereLettura);
         }
     }

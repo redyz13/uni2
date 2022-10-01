@@ -1,11 +1,9 @@
-#include "stdbool.h"
-
 #define LEN 30
 
 typedef struct Artista {
     char nome[LEN+1];
     char genere[LEN+1];
-    bool gruppo;
+    int gruppo;
     int anni;
 } Artista;
 
@@ -14,7 +12,7 @@ typedef struct Canzone {
     Artista artista;
 } Canzone;
 
-Artista creaArtista(char *nome, char *genere, bool gruppo, int anni);
+Artista creaArtista(char *nome, char *genere, int gruppo, int anni);
 
 Canzone creaCanzone(Artista artista, char *titolo);
 

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include "util.h"
 
 void leggiStringa(char *str, int buff) {
