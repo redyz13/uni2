@@ -26,6 +26,8 @@ int main(void) {
     do {
         printf("0. Esci dal programma\n1. Visualizza canzoni artista\n2. Inserisci canzone\n");
         printf("3. Modifica nome artista\n4. Cancella canzoni artista\n");
+        printf("5. Visualizza canzoni di artisti con meno di 30 anni\n");
+        printf("6. Visualizza canzoni di gruppi costituiti da meno di 5 anni\n");
         printf("\nSelezione: ");
         scanf("%c", &c);
         getchar();
@@ -89,6 +91,25 @@ int main(void) {
                     printf("\n[Artista non trovato]\n\n");
                 else if (eseguito < 0)
                     printf("\n[Il file non può essere aperto]\n\n");
+
+                break;
+            
+            case '5':
+                eseguito = query1(nomeFile);
+
+                if (eseguito == 0)
+                    printf("\n[Nessuna canzone]\n\n");
+                else if (eseguito < 0)
+                    printf("\nIl file non può essere aperto\n\n");
+
+                break;
+            case '6':
+                eseguito = query2(nomeFile);
+
+                if (eseguito == 0)
+                    printf("\n[Nessuna canzone]\n\n");
+                else if (eseguito < 0)
+                    printf("\nIl file non può essere aperto\n\n");
 
                 break;
 
