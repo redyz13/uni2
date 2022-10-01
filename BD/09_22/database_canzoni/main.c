@@ -18,6 +18,7 @@ int main(void) {
     char nomeRicerca[LEN+1];
     char nomeVecchio[LEN+1];
     char nomeNuovo[LEN+1];
+    char nomeRimozione[LEN+1];
     Canzone canzone;
     int eseguito;
     char c;
@@ -66,6 +67,21 @@ int main(void) {
                 leggiStringa(nomeNuovo, LEN+1);
                 
                 eseguito = modificaNome(nomeFile, nomeVecchio, nomeNuovo);
+
+                if (eseguito)
+                    printf("\n[Operazione eseguita]\n\n");
+                else if (eseguito == 0)
+                    printf("\n[Artista non trovato]\n\n");
+                else if (eseguito < 0)
+                    printf("\n[Il file non può essere aperto]\n\n");
+
+                break;
+                
+            case '4':
+                printf("\n- Inserire il nome dell'artista da rimuovere: ");
+                leggiStringa(nomeRimozione, LEN+1);
+                
+                eseguito = cancellaArtista(nomeFile, nomeRimozione);
 
                 if (eseguito)
                     printf("\n[Operazione eseguita]\n\n");
