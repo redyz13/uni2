@@ -85,10 +85,7 @@ int visualizzaCanzoni(char *nomeFile, char *nomeRicerca) {
 static int inserisciDettagli(Artista artista) {
     FILE *fp;
     FILE *ftmp;
-    char nomeArtistaLettura[LEN+1];
-    char genereLettura[LEN+1];
-    int gruppoLettura;
-    int anniLettura;
+    Artista artistaLettura;
     int inserito = 0;
     
     if ((fp = fopen("dettagliArtisti", "r")) == NULL) return -1;
@@ -110,24 +107,24 @@ static int inserisciDettagli(Artista artista) {
     else rewind(fp);
 
     while (!feof(fp)) {
-        if (fscanf(fp, "%s%d%d%s", nomeArtistaLettura, &gruppoLettura,
-                   &anniLettura, genereLettura) != 4)
+        if (fscanf(fp, "%s%d%d%s", artistaLettura.nome, &artistaLettura.gruppo,
+                   &artistaLettura.anni, artistaLettura.genere) != 4)
             break;
 
         // Stesso nome artista
-        if (strcmp(artista.nome ,nomeArtistaLettura) == 0) {
+        if (strcmp(artista.nome ,artistaLettura.nome) == 0) {
             return 0;
         }
         // Il nome dell'artista da aggiungere è più piccolo di quello letto, inserisco quello da aggiungere
-        else if (!inserito && strcmp(artista.nome, nomeArtistaLettura) < 0) {
+        else if (!inserito && strcmp(artista.nome, artistaLettura.nome) < 0) {
             inserito = 1;
             fprintf(ftmp, "%s\t %d\t %d\t %s\n", artista.nome, artista.gruppo,
                     artista.anni, artista.genere);
         }
 
         // Aggiungo dopo la canzone che ho letto dal file
-        fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, gruppoLettura,
-                anniLettura, genereLettura);
+        fprintf(ftmp, "%s\t %d\t %d\t %s\n", artistaLettura.nome, artistaLettura.gruppo,
+                artistaLettura.anni, artistaLettura.genere);
     }
     
     if (!inserito)
@@ -220,25 +217,22 @@ int inserisciCanzone(char *nomeFile, Canzone canzone) {
 static int modificaDettagli(char *nomeVecchio, char *nomeNuovo) {
     FILE *fp;
     FILE *ftmp;
-    char nomeArtistaLettura[LEN+1];
-    char genereLettura[LEN+1];
-    int gruppoLettura;
-    int anniLettura;
+    Artista artistaLettura;
     
     if ((fp = fopen("dettagliArtisti", "r")) == NULL) return -1;
     if ((ftmp = fopen("tmp", "w")) == NULL) return -1;
 
     while (!feof(fp)) {
-        if (fscanf(fp, "%s%d%d%s", nomeArtistaLettura, &gruppoLettura,
-                   &anniLettura, genereLettura) != 4)
+        if (fscanf(fp, "%s%d%d%s", artistaLettura.nome, &artistaLettura.gruppo,
+                   &artistaLettura.anni, artistaLettura.genere) != 4)
             break;
 
-        if (strcmp(nomeVecchio, nomeArtistaLettura) == 0)
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeNuovo, gruppoLettura,
-                    anniLettura, genereLettura);
+        if (strcmp(nomeVecchio, artistaLettura.nome) == 0)
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeNuovo, artistaLettura.gruppo,
+                    artistaLettura.anni, artistaLettura.genere);
         else
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, gruppoLettura,
-                    anniLettura, genereLettura);
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", artistaLettura.nome, artistaLettura.gruppo,
+                    artistaLettura.anni, artistaLettura.genere);
     }
 
     fclose(fp);
@@ -293,22 +287,19 @@ int modificaNome(char *nomeFile, char *nomeVecchio, char *nomeNuovo) {
 static int cancellaDettagli(char *nomeRimozione) {
     FILE *fp;
     FILE *ftmp;
-    char nomeArtistaLettura[LEN+1];
-    char genereLettura[LEN+1];
-    int gruppoLettura;
-    int anniLettura;
+    Artista artistaLettura;
     
     if ((fp = fopen("dettagliArtisti", "r")) == NULL) return -1;
     if ((ftmp = fopen("tmp", "w")) == NULL) return -1;
 
     while (!feof(fp)) {
-        if (fscanf(fp, "%s%d%d%s", nomeArtistaLettura, &gruppoLettura,
-                   &anniLettura, genereLettura) != 4)
+        if (fscanf(fp, "%s%d%d%s", artistaLettura.nome, &artistaLettura.gruppo,
+                   &artistaLettura.anni, artistaLettura.genere) != 4)
             break;
 
-        if (strcmp(nomeRimozione, nomeArtistaLettura) != 0) {
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeArtistaLettura, gruppoLettura,
-                    anniLettura, genereLettura);
+        if (strcmp(nomeRimozione, artistaLettura.nome) != 0) {
+            fprintf(ftmp, "%s\t %d\t %d\t %s\n", artistaLettura.nome, artistaLettura.gruppo,
+                    artistaLettura.anni, artistaLettura.genere);
         }
     }
 
@@ -363,12 +354,8 @@ int cancellaArtista(char *nomeFile, char *nomeRimozione) {
 int query1(char *nomeFile) {
     FILE *fp;
     FILE *fd;
-    char nomeCanzoneLettura[LEN+1];
-    char nomeArtistaLettura[LEN+1];
+    Canzone canzoneLettura;
     char nomeArtistaDettagli[LEN+1];
-    char genereLettura[LEN+1];
-    int gruppoLettura;
-    int anniLettura;
     int trovate = 0;
     int ultimo = 0;
     
@@ -377,26 +364,26 @@ int query1(char *nomeFile) {
     
         
     while (!feof(fd)) {
-        if (fscanf(fd, "%s%d%d%s", nomeArtistaDettagli, &gruppoLettura,
-                   &anniLettura, genereLettura) != 4)
+        if (fscanf(fd, "%s%d%d%s", nomeArtistaDettagli, &canzoneLettura.artista.gruppo,
+                   &canzoneLettura.artista.anni, canzoneLettura.artista.genere) != 4)
             break;
                 
         if (!ultimo)
-            if ((fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2)
+            if ((fscanf(fp, "%s%s", canzoneLettura.artista.nome, canzoneLettura.titolo)) != 2)
                 break;
 
         ultimo = 0;
 
-        while ((strcmp(nomeArtistaDettagli, nomeArtistaLettura)) == 0) {
-            if (gruppoLettura == 0 && anniLettura < 30) {
+        while ((strcmp(nomeArtistaDettagli, canzoneLettura.artista.nome)) == 0) {
+            if (canzoneLettura.artista.gruppo == 0 && canzoneLettura.artista.anni < 30) {
                 if (!trovate) printf("\n[Canzoni trovate]\n");
                 trovate = 1;
-                printf("- %s\n", nomeCanzoneLettura);
+                printf("- %s\n", canzoneLettura.titolo);
             }
             
             ultimo = 1;
 
-            if ((fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2)
+            if ((fscanf(fp, "%s%s", canzoneLettura.artista.nome, canzoneLettura.titolo)) != 2)
                 break;
         }
     }
@@ -412,5 +399,5 @@ int query1(char *nomeFile) {
 }
 
 int query2(char *nomeFile) {
-
+    return 1;
 }
