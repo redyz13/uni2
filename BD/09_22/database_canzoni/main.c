@@ -17,7 +17,6 @@ int main(void) {
     
     char nomeRicerca[LEN+1];
     char nomeVecchio[LEN+1];
-    char nomeNuovo[LEN+1];
     char nomeRimozione[LEN+1];
     Canzone canzone;
     Artista artista;
@@ -28,7 +27,7 @@ int main(void) {
         printf("0. Esci dal programma\n1. Visualizza canzoni artista\n2. Inserisci canzone\n");
         printf("3. Modifica nome artista\n4. Cancella canzoni artista\n");
         printf("5. Visualizza canzoni di artisti autonomi con meno di 30 anni\n");
-        printf("6. Visualizza canzoni di gruppi costituiti da meno di 5 anni\n");
+        printf("   oppure visualizza canzoni di gruppi costituiti da meno di 5 anni\n");
         printf("\nSelezione: ");
         scanf("%c", &c);
         getchar();
@@ -96,16 +95,7 @@ int main(void) {
                 break;
             
             case '5':
-                eseguito = query1(nomeFile);
-
-                if (eseguito == 0)
-                    printf("\n[Nessuna canzone trovata]\n\n");
-                else if (eseguito < 0)
-                    printf("\nIl file non può essere aperto\n\n");
-
-                break;
-            case '6':
-                eseguito = query2(nomeFile);
+                eseguito = query(nomeFile);
 
                 if (eseguito == 0)
                     printf("\n[Nessuna canzone trovata]\n\n");

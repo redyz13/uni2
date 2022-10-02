@@ -323,7 +323,7 @@ int cancellaArtista(char *nomeFile, char *nomeRimozione) {
     return trovato;
 }
 
-int query1(char *nomeFile) {
+int query(char *nomeFile) {
     FILE *fp;
     FILE *fd;
     Canzone canzoneLettura;
@@ -347,7 +347,8 @@ int query1(char *nomeFile) {
         ultimo = 0;
 
         while ((strcmp(nomeArtistaDettagli, canzoneLettura.artista.nome)) == 0) {
-            if (canzoneLettura.artista.gruppo == 0 && canzoneLettura.artista.anni < 30) {
+            if ((canzoneLettura.artista.gruppo == 0 && canzoneLettura.artista.anni < 30) || 
+                (canzoneLettura.artista.gruppo == 1 && canzoneLettura.artista.anni < 5)) {
                 if (!trovate) printf("\n[Canzoni trovate]\n");
                 trovate = 1;
                 printf("- %s\n", canzoneLettura.titolo);
@@ -367,9 +368,5 @@ int query1(char *nomeFile) {
 
     putchar('\n');
 
-    return 1;
-}
-
-int query2(char *nomeFile) {
     return 1;
 }

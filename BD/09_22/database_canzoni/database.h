@@ -26,6 +26,4 @@ int modificaNome(char *nomeFile, char *nomeVecchio, Artista artista);
 
 int cancellaArtista(char *nomeFile, char *nomeRimozione);
 
-int query1(char *nomeFile);
-
-int query2(char *nomeFile);
+int query(char *nomeFile);
