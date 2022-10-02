@@ -20,6 +20,7 @@ int main(void) {
     char nomeNuovo[LEN+1];
     char nomeRimozione[LEN+1];
     Canzone canzone;
+    Artista artista;
     int eseguito;
     char c;
     
@@ -65,10 +66,10 @@ int main(void) {
             case '3':
                 printf("\n- Inserire il nome dell'artista da modificare: ");
                 leggiStringa(nomeVecchio, LEN+1);
-                printf("- Inserire il nuovo nome dell'artista da modificare: ");
-                leggiStringa(nomeNuovo, LEN+1);
+
+                artista = artistaInput();
                 
-                eseguito = modificaNome(nomeFile, nomeVecchio, nomeNuovo);
+                eseguito = modificaNome(nomeFile, nomeVecchio, artista);
 
                 if (eseguito)
                     printf("\n[Operazione eseguita]\n\n");

@@ -22,7 +22,7 @@ int visualizzaCanzoni(char *nomeFile, char *nomeRicerca);
 
 int inserisciCanzone(char *nomeFile, Canzone canzone);
 
-int modificaNome(char *nomeFile, char *nomeVecchio, char *nomeNuovo);
+int modificaNome(char *nomeFile, char *nomeVecchio, Artista artista);
 
 int cancellaArtista(char *nomeFile, char *nomeRimozione);
 

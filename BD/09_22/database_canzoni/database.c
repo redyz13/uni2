@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "database.h"
 
 Artista creaArtista(char *nome, char *genere, int gruppo, int anni) {
@@ -206,45 +207,12 @@ int inserisciCanzone(char *nomeFile, Canzone canzone) {
     remove(nomeFile);
     rename("tmp", nomeFile);
     
-    if (inserisciDettagli(canzone.artista) < 1)
-        printf("\n[Artista non aggiornato]\n");
-    else
-        printf("\n[Artista aggiunto]\n");
+    inserisciDettagli(canzone.artista);
     
     return 1;
 }
 
-static int modificaDettagli(char *nomeVecchio, char *nomeNuovo) {
-    FILE *fp;
-    FILE *ftmp;
-    Artista artistaLettura;
-    
-    if ((fp = fopen("dettagliArtisti", "r")) == NULL) return -1;
-    if ((ftmp = fopen("tmp", "w")) == NULL) return -1;
-
-    while (!feof(fp)) {
-        if (fscanf(fp, "%s%d%d%s", artistaLettura.nome, &artistaLettura.gruppo,
-                   &artistaLettura.anni, artistaLettura.genere) != 4)
-            break;
-
-        if (strcmp(nomeVecchio, artistaLettura.nome) == 0)
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", nomeNuovo, artistaLettura.gruppo,
-                    artistaLettura.anni, artistaLettura.genere);
-        else
-            fprintf(ftmp, "%s\t %d\t %d\t %s\n", artistaLettura.nome, artistaLettura.gruppo,
-                    artistaLettura.anni, artistaLettura.genere);
-    }
-
-    fclose(fp);
-    fclose(ftmp);
-
-    remove("dettagliArtisti");
-    rename("tmp", "dettagliArtisti");
-    
-    return 1;
-}
-
-int modificaNome(char *nomeFile, char *nomeVecchio, char *nomeNuovo) {
+int modificaNome(char *nomeFile, char *nomeVecchio, Artista artista) {
     FILE *fp;
     FILE *ftmp;
     char nomeArtistaLettura[LEN+1];
@@ -252,36 +220,45 @@ int modificaNome(char *nomeFile, char *nomeVecchio, char *nomeNuovo) {
     int trovato = 0;
 
     if ((fp = fopen(nomeFile, "r")) == NULL) return -1;
-    if ((ftmp = fopen("tmp", "w")) == NULL) return -1;
+    if ((ftmp = fopen("tmp2", "w")) == NULL) return -1;
     
     while (!feof(fp)) {
         if ((fscanf(fp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2)
             break;
 
         if (strcmp(nomeVecchio, nomeArtistaLettura) == 0) {
-            if (!trovato) printf("\n[Canzoni a cui è stato sostuito l'artista]\n");
             trovato = 1;
-            printf("- %s\n", nomeCanzoneLettura);
-            fprintf(ftmp, "%s\t %s\n", nomeNuovo, nomeCanzoneLettura);
+            fprintf(ftmp, "%s\t %s\n", artista.nome, nomeCanzoneLettura);
         }
-        else
-            fprintf(ftmp, "%s\t %s\n", nomeArtistaLettura, nomeCanzoneLettura);
     }
 
     fclose(fp);
     fclose(ftmp);
-
-    remove(nomeFile);
-    rename("tmp", nomeFile);
-
-    if (trovato) {
-        if (modificaDettagli(nomeVecchio, nomeNuovo) < 1)
-            printf("\n[Artista non aggiornato]\n");
-        else
-            printf("\n[Artista aggiornato]\n");
+    
+    if (trovato) 
+        cancellaArtista(nomeFile, nomeVecchio);
+    else {
+        remove("tmp2");
+        return 0;
     }
     
-    return trovato;
+    if ((ftmp = fopen("tmp2", "r")) == NULL) return -1;
+    
+    Canzone canzone;
+    canzone.artista = artista;
+
+    while (!feof(ftmp)) {
+        if ((fscanf(ftmp, "%s%s", nomeArtistaLettura, nomeCanzoneLettura)) != 2)
+            break;
+
+        strcpy(canzone.titolo, nomeCanzoneLettura);
+        inserisciCanzone(nomeFile, canzone);
+    }
+    
+    fclose(ftmp);
+    remove("tmp2");
+
+    return 1;
 }
 
 static int cancellaDettagli(char *nomeRimozione) {
@@ -327,7 +304,7 @@ int cancellaArtista(char *nomeFile, char *nomeRimozione) {
             break;
 
         if (strcmp(nomeRimozione, nomeArtistaLettura) == 0) {
-            if (!trovato) printf("\n[Canzoni cancellate]\n");
+            if (!trovato) printf("\n[Canzoni modificate]\n");
             trovato = 1;
             printf("- %s\n", nomeCanzoneLettura);
         }
@@ -341,12 +318,7 @@ int cancellaArtista(char *nomeFile, char *nomeRimozione) {
     remove(nomeFile);
     rename("tmp", nomeFile);
 
-    if (trovato) {
-        if (cancellaDettagli(nomeRimozione) < 1)
-            printf("\n[Artista non cancellato]\n");
-        else
-            printf("\n[Artista cancellato]\n");
-    }
+    cancellaDettagli(nomeRimozione);
     
     return trovato;
 }
