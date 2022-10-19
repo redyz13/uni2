@@ -8,7 +8,7 @@
 typedef unsigned(*func_t)(unsigned n);
 
 unsigned fib(unsigned n) {
-    if (n == 0) return n;
+    if (n <= 1) return n;
 
     return fib(n - 1) + fib(n - 2);
 }
@@ -27,13 +27,10 @@ void printFunc(func_t func, unsigned n) {
 int main(void) {
     pid_t pid = fork();
 
-    if (pid == 0) {
+    if (pid == 0)
         printFunc(fib, 10);
-    }
-    else if (pid > 0) {
+    else if (pid > 0)
         printFunc(fact, 10);
-
-    }
     
     putchar('\n');
 
