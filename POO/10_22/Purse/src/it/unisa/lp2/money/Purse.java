@@ -7,7 +7,6 @@ public class Purse {
 
     public Purse() {
         purse = new Coin[MAXCOIN];
-        actualCoins = 0;
     }
 
     public boolean addCoin(Coin c) {
