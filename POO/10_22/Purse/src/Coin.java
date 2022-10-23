@@ -1,5 +1,3 @@
-package it.unisa.lp2.money;
-
 public class Coin {
     private final float value;
     private final String name;

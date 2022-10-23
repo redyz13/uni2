@@ -1,5 +1,3 @@
-package it.unisa.lp2.money;
-
 public class Purse {
     private final Coin[] purse;
     private static final int MAXCOIN = 50;

@@ -1,6 +1,3 @@
-import it.unisa.lp2.money.Purse;
-import it.unisa.lp2.money.Coin;
-
 public class MoneyTest {
     public static void main(String[] args) {
         Purse p = new Purse();
