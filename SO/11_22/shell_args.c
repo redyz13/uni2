@@ -23,10 +23,9 @@ int main(void) {
 
             ch = getchar();
 
-            if (ch == ' ')
-                strcpy(list[k++], buff);
-            else if (ch == '\n') {
-                strcpy(list[k++], buff);
+            strcpy(list[k++], buff);
+
+            if (ch == '\n') {
                 list[k] = NULL;
                 break;
             }
