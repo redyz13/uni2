@@ -10,7 +10,6 @@
 int main(void) {
     pid_t pid;
     char *list[NARGS];
-    char buff[BUFSIZE];
     int ch, k;
 
     do {
@@ -19,11 +18,9 @@ int main(void) {
 
         do {
             list[k] = malloc(BUFSIZE);
-            scanf("%s", buff);
+            scanf("%s", list[k++]);
 
             ch = getchar();
-
-            strcpy(list[k++], buff);
 
             if (ch == '\n') {
                 list[k] = NULL;
