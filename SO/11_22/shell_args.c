@@ -41,7 +41,7 @@ int main(void) {
             exit(-1);
         else if (pid == 0) {
             if (execvp(list[0], list) == -1) {
-                printf("Command \'%s\' not found\n", list[0]);
+                fprintf(stderr, "Command \'%s\' not found\n", list[0]);
                 exit(-1);
             }
         }

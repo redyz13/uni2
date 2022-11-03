@@ -27,7 +27,7 @@ int main(void) {
             exit(-1);
         else if (pid == 0) {
             if (execlp(name, name, NULL) == -1) {
-                printf("Command \'%s\' not found\n", name);
+                fprintf(stderr, "Command \'%s\' not found\n", name);
                 exit(-1);
             }
         }
