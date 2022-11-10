@@ -1,0 +1,10 @@
+Cavaliere{idPersonaggio=0ID=0, tipoPersonaggio='tipo0', energia=0.0, posizioneIniziale=Posizione{x=1.0, y=2.0, z=3.0, r=0.0}, posizioneAttuale=Posizione{x=1.0, y=2.0, z=3.0, r=0.0}}
+Cavaliere{idPersonaggio=1ID=1, tipoPersonaggio='tipo1', energia=10.0, posizioneIniziale=Posizione{x=2.0, y=3.0, z=4.0, r=10.0}, posizioneAttuale=Posizione{x=2.0, y=3.0, z=4.0, r=10.0}}
+Cavaliere{idPersonaggio=2ID=2, tipoPersonaggio='tipo2', energia=20.0, posizioneIniziale=Posizione{x=3.0, y=4.0, z=5.0, r=20.0}, posizioneAttuale=Posizione{x=3.0, y=4.0, z=5.0, r=20.0}}
+Cavaliere{idPersonaggio=3ID=3, tipoPersonaggio='tipo3', energia=30.0, posizioneIniziale=Posizione{x=4.0, y=5.0, z=6.0, r=30.0}, posizioneAttuale=Posizione{x=4.0, y=5.0, z=6.0, r=30.0}}
+Cavaliere{idPersonaggio=4ID=4, tipoPersonaggio='tipo4', energia=40.0, posizioneIniziale=Posizione{x=5.0, y=6.0, z=7.0, r=40.0}, posizioneAttuale=Posizione{x=5.0, y=6.0, z=7.0, r=40.0}}
+Orco{idPersonaggio=0ID=0, tipoPersonaggio='tipo0', energia=0.0, posizioneIniziale=Posizione{x=1.0, y=2.0, z=3.0, r=0.0}, posizioneAttuale=Posizione{x=1.0, y=2.0, z=3.0, r=0.0}}
+Orco{idPersonaggio=1ID=1, tipoPersonaggio='tipo1', energia=10.0, posizioneIniziale=Posizione{x=2.0, y=3.0, z=4.0, r=10.0}, posizioneAttuale=Posizione{x=2.0, y=3.0, z=4.0, r=10.0}}
+Orco{idPersonaggio=2ID=2, tipoPersonaggio='tipo2', energia=20.0, posizioneIniziale=Posizione{x=3.0, y=4.0, z=5.0, r=20.0}, posizioneAttuale=Posizione{x=3.0, y=4.0, z=5.0, r=20.0}}
+Orco{idPersonaggio=3ID=3, tipoPersonaggio='tipo3', energia=30.0, posizioneIniziale=Posizione{x=4.0, y=5.0, z=6.0, r=30.0}, posizioneAttuale=Posizione{x=4.0, y=5.0, z=6.0, r=30.0}}
+Orco{idPersonaggio=4ID=4, tipoPersonaggio='tipo4', energia=40.0, posizioneIniziale=Posizione{x=5.0, y=6.0, z=7.0, r=40.0}, posizioneAttuale=Posizione{x=5.0, y=6.0, z=7.0, r=40.0}}
