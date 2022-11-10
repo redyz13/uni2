@@ -21,6 +21,7 @@ public class Camera {
     public void pulisci() {
         condizioni = "pulita";
     }
+
     public String informazioni() {
         return "Numero: " + numero + "\nStato: " + "\nCondizioni: " +
                 "Lista clienti:\n" + listaClienti + '\n';
