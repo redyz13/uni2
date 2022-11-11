@@ -7,13 +7,9 @@ public class Test {
         ArrayList<Personaggio> personaggi = new ArrayList<>();
 
         for (int i = 0; i < 5; i++)
-            personaggi.add(new Cavaliere(i, "tipo" + i, i * 10, new Posizione(i + 1, i + 2, i + 3, i * 10)));
+            personaggi.add(new Cavaliere(i, "tipo" + i, (i + 1) * 20, new Posizione(i + 1, i + 2, i + 3, i * 10)));
         for (int i = 0; i < 5; i++)
-            personaggi.add(new Orco(i, "tipo" + i, i * 10, new Posizione(i + 1, i + 2, i + 3, i * 10)));
-
-//        for (Personaggio personaggio : personaggi) {
-//            System.out.println(personaggio);
-//        }
+            personaggi.add(new Orco(i, "tipo" + i, (i + 1) * 20, new Posizione(i + 1, i + 2, i + 3, i * 10)));
 
         try {
             FileWriter fw = new FileWriter("output.txt");
@@ -21,7 +17,6 @@ public class Test {
                 fw.write(personaggio.toString());
                 fw.write('\n');
             }
-//            fw.write(personaggi.toString());
             fw.close();
         }
         catch (IOException e) {

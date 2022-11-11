@@ -19,7 +19,7 @@ public class Orco extends  Personaggio {
 
     @Override
     public void colpisci(Personaggio personaggio) {
-
+        personaggio.energia -= 10;
     }
 
     public int getID() {
