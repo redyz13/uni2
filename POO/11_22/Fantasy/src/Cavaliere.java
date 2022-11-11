@@ -12,18 +12,28 @@ public class Cavaliere extends Personaggio {
         ID = idCounter++;
     }
 
-    @Override
     public Posizione getPosizione(Personaggio personaggio) {
         return posizioneAttuale;
     }
 
-    @Override
     public void colpisci(Personaggio personaggio) {
         personaggio.energia -= 10;
     }
 
     public int getID() {
         return ID;
+    }
+
+    public void ruota(int g) {
+        posizioneAttuale.r += g;
+    }
+
+    public void avanti(int s) {
+        posizioneAttuale.y += s;
+    }
+
+    public void indietro(int s) {
+        posizioneAttuale.y -= s;
     }
 
     @Override

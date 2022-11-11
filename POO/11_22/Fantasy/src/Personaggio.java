@@ -21,15 +21,9 @@ abstract public class Personaggio implements SuperPersonaggio {
         this.posizioneAttuale = posizioneIniziale;
     }
 
-    public void ruota(int g) {
-        posizioneAttuale.r += g;
-    }
+    abstract public void ruota(int g);
 
-    public void avanti(int s) {
-        posizioneAttuale.y += s;
-    }
+    abstract public void avanti(int s);
 
-    public void indietro(int s) {
-        posizioneAttuale.y -= s;
-    }
+    abstract public void indietro(int s);
 }

@@ -15,10 +15,8 @@ public class Test {
 
         try {
             FileWriter fw = new FileWriter("output.txt");
-            for (Personaggio personaggio : personaggi) {
-                fw.write(personaggio.toString());
-                fw.write('\n');
-            }
+            for (Personaggio personaggio : personaggi)
+                fw.write(personaggio.toString() + '\n');
             fw.close();
         }
         catch (IOException e) {
