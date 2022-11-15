@@ -19,7 +19,7 @@ public class Test {
         System.out.print(rubrica.ricercaNome("Paoloo") + " ");
         System.out.print(rubrica.ricercaCognome("Paolo") + " ");
         System.out.print(rubrica.ricercaNomeCognome("Paolo", "Paolo") + " ");
-        System.out.println(rubrica.ricercaTelefono("3335795853") + "\n");
+        System.out.println(rubrica.ricercaTelefono("6665795123") + "\n");
 
         System.out.println("Rubrica: ");
         System.out.println(rubrica + "\n");
