@@ -12,7 +12,6 @@ public class Test {
         System.out.print(rubrica.ricercaNomeCognome("Luca", "Casillo") + " ");
         System.out.println(rubrica.ricercaTelefono("1112233444") + "\n");
 
-
         rubrica.getContatto(0).aggiungiNumero("6665765863");
 
         System.out.println("Test: ");
