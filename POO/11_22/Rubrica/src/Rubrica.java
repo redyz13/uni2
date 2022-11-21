@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Rubrica {
-    ArrayList<Contatto> contatti;
+    private final ArrayList<Contatto> contatti;
 
     public Rubrica() {
         contatti = new ArrayList<>();
