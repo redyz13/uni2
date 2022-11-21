@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> // Aggiunta di una libreria (necessaria per la exit())
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -21,7 +21,8 @@ int main(void) {
         pid2 = fork();
 
         if (pid2 < 0) exit(-1);
-        else if (pid2 == 0) { // Figlio 2
+        // Figlio 2
+        else if (pid2 == 0) {
             for (int i = 1; i <= 5; i++)
                 printf("%d\n", getppid());
             execl("/bin/ls", "ls", NULL);
@@ -33,5 +34,4 @@ int main(void) {
             exit(0);
         }
     }
-
-}
+} // Aggiunta dell'ultima parentesi graffa dimenticata
