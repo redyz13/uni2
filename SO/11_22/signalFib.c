@@ -5,7 +5,7 @@
 void sig_hdl(int signo) {
     char c;
 
-    if (signo == SIGINT)
+    if (signo == SIGINT) {
         printf("\n\nVuoi continuare l'esecuzione? (s/n): ");
         scanf("%c", &c);
         if (c == 's') {
@@ -14,6 +14,7 @@ void sig_hdl(int signo) {
         }
         else
             exit(0);
+    }
 }
 
 unsigned fib(unsigned n) {
