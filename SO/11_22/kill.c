@@ -13,6 +13,11 @@ unsigned fib(unsigned n) {
 void sig_hdl(int signo) {
     pid_t pid;
 
+    if (signal(SIGINT, sig_hdl) == SIG_ERR) {
+        printf("Errore di sistema: SIGINT\n");
+        exit(1);
+    }
+
     pid = fork();
 
     if (pid < 0)
