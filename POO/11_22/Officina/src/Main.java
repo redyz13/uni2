@@ -1,14 +1,18 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         Officina officina = new Officina();
 
-        if (args[1] == null)
-            System.out.println("Utilizzo argomenti: <nome_file_output_schede, nome_file_veicoli_iniziali>");
+        if (args[1] != null)
+            leggiSchede(officina, args[1]);
 
-        leggiSchede(args[1], args[0]);
         creaSchede(officina);
+
+        officina.getScheda(0).setStato(Scheda.Stati.CONSEGNATO);
+        officina.getScheda(1).setStato(Scheda.Stati.CONSEGNATO);
+
         officina.stampaVeicoli(args[0], null);
 
         int veicoliConsegnati = inizializzaVeicoliConsegnati();
@@ -27,10 +31,6 @@ public class Main {
     private static void creaSchede(Officina officina) {
         for (int i = 5; i < 10; i++)
             officina.aggiungiScheda(new Scheda(Integer.toString(i), Integer.toString(i)));
-
-        officina.getScheda(0).setStato(Scheda.Stati.CONSEGNATO);
-        officina.getScheda(1).setStato(Scheda.Stati.CONSEGNATO);
-        officina.getScheda(2).setStato(Scheda.Stati.RIPARATO);
     }
 
     private static int inizializzaVeicoliConsegnati() {
@@ -41,18 +41,21 @@ public class Main {
         }
     }
 
-    private static void leggiSchede(String fileVeicoliIniziali, String fileVeicoli) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileVeicoliIniziali));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileVeicoli));
-        String line = bufferedReader.readLine();
+    private static void leggiSchede(Officina officina, String filename) throws IOException {
+        Scanner scanner = new Scanner(new BufferedReader(new FileReader(filename)));
 
-        while (line != null) {
-            bufferedWriter.write(line);
-            bufferedWriter.newLine();
-            line = bufferedReader.readLine();
+        while (scanner.hasNext()) {
+            String stato = scanner.next();
+            String targa = scanner.next();
+            String modello = scanner.next();
+
+            Scheda scheda = new Scheda(targa, modello);
+            scheda.setStato(Scheda.Stati.valueOf(stato));
+            officina.aggiungiScheda(scheda);
+
+            scanner.nextLine();
         }
 
-        bufferedWriter.close();
-        bufferedReader.close();
+        scanner.close();
     }
 }
