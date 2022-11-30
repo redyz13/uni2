@@ -34,11 +34,8 @@ public class Main {
     }
 
     private static int inizializzaVeicoliConsegnati() {
-        FileReader fileReader;
-
-        try {
-            fileReader = new FileReader("numero_veicoli_consegnati");
-            return fileReader.read();
+        try (FileInputStream fileInputStream = new FileInputStream("numero_veicoli_consegnati")) {
+            return fileInputStream.read();
         } catch (IOException e) {
             return 0;
         }
