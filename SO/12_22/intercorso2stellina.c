@@ -91,7 +91,7 @@ int main(void) {
                 exit(1);
             }
             for (int i = 0; i < 20; i++) {
-                printf("%d", fatt(i));
+                printf("%d\n", fatt(i)); // Scordatino \n
             }
             exit(0);
         }
