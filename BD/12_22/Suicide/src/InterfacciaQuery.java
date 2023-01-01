@@ -12,6 +12,8 @@ public class InterfacciaQuery {
         interfacciaQuery.connessione();
         interfacciaQuery.dashboard();
         interfacciaQuery.database.close();
+
+        System.out.println("-------------- Connessione terminata --------------");
     }
 
     private void connessione() throws SQLException, ClassNotFoundException {
@@ -56,7 +58,9 @@ public class InterfacciaQuery {
                 case '3' -> query.queryTest();
                 case '4' -> query.query4();
                 case '5' -> query.query5();
-                case '0' -> System.exit(0);
+                case '0' -> {
+                    return;
+                }
                 default -> System.out.println("Paolissimo");
             }
         }
