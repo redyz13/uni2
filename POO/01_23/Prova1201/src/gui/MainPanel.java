@@ -5,7 +5,6 @@ import core.Camion;
 import core.Macchina;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
 public class MainPanel extends JPanel {
@@ -61,8 +60,10 @@ public class MainPanel extends JPanel {
 
             auto.add(app);
 
-            for (Autovettura a : auto)
-                System.out.println(a);
+            if (app instanceof Camion)
+                System.out.println("Camion aggiunto:\n" + app);
+            else
+                System.out.println("Macchina aggiunta:\n" + app);
         });
 
         add(button);
