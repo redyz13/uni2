@@ -1,0 +1,4 @@
+{tipoAutovettura='Tipo1', colore='Colore1', numeroRuote=4, cilindrata=50, statoMotore=false}
+{tipoAutovettura='Tipo2', colore='Colore2', numeroRuote=4, cilindrata=50, statoMotore=false}
+{tipoAutovettura='Tipo3', colore='Colore3', numeroRuote=5, cilindrata=50, statoMotore=false}
+{tipoAutovettura='Tipo4', colore='Colore4', numeroRuote=4, cilindrata=50, statoMotore=false}
