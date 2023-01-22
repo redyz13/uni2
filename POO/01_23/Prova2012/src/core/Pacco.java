@@ -3,9 +3,9 @@ package core;
 import java.util.GregorianCalendar;
 
 public class Pacco {
-    public static int PICCOLO = 0;
-    public static int MEDIO = 1;
-    public static int GRANDE = 2;
+    public final static int PICCOLO = 0;
+    public final static int MEDIO = 1;
+    public final static int GRANDE = 2;
     private int tipo;
     private String descrizione;
     private static int contatore;
