@@ -1,0 +1,2 @@
+core.Studente{nome='', cognome='', matricola='', anni=22, esamiSuperati=[core.Esame{nome='', cfu=10, voto=11}, core.Esame{nome='', cfu=12, voto=11}]}
+core.Studente{nome='', cognome='', matricola='', anni=23, esamiSuperati=[core.Esame{nome='', cfu=12, voto=11}]}

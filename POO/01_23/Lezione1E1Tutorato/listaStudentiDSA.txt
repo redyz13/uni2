@@ -1,0 +1,1 @@
+core.StudenteDSA{descrizionePatologia='', nome='', cognome='', matricola='', anni=24, esamiSuperati=[]}
