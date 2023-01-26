@@ -26,32 +26,32 @@ public class Test {
         playerList.add(new LottatoreVolante(60, 50, 40));
 
         System.out.println("Stampa delle info di tutti i Player");
-        printInfoPlayer(playerList, p -> true, Player::toString);
+        printInfo(playerList, p -> true, Player::toString);
         System.out.println();
 
         System.out.println("Stampa delle info di tutti i Player con attacco e difesa >= 100 (o di una soglia K)");
-        printInfoPlayer(playerList, p -> p.getAttacco() >= 100 && p.getDifesa() >= 100, Player::toString);
+        printInfo(playerList, p -> p.getAttacco() >= 100 && p.getDifesa() >= 100, Player::toString);
         System.out.println();
 
         System.out.println("Stampa delle info di tutti i Player con punti vita >= difesa");
-        printInfoPlayer(playerList, p -> p.getPuntiVita() >= p.getDifesa(), Player::toString);
+        printInfo(playerList, p -> p.getPuntiVita() >= p.getDifesa(), Player::toString);
         System.out.println();
 
         System.out.println("Stampa delle info di tutti e soli i Maghi");
-        printInfoPlayer(playerList, p -> p instanceof Mago, Player::toString);
+        printInfo(playerList, p -> p instanceof Mago, Player::toString);
         System.out.println();
 
         System.out.println("Stampa delle info di tutti e soli i Lottatori");
-        printInfoPlayer(playerList, p -> p instanceof Lottatore, Player::toString);
+        printInfo(playerList, p -> p instanceof Lottatore, Player::toString);
         System.out.println();
 
         System.out.println("Stampa dei soli valori d’attacco di tutti i Player");
-        printInfoPlayer(playerList, p -> true, p -> String.valueOf(p.getAttacco()));
+        printInfo(playerList, p -> true, p -> String.valueOf(p.getAttacco()));
         System.out.println();
     }
 
-    private static void printInfoPlayer(List<Player> playerList, Predicate<Player> filter,
-                                        Function<Player, String> map) {
-        playerList.stream().filter(filter).map(map).forEach(System.out::println);
+    private static <T> void printInfo(List<T> list, Predicate<T> filter,
+                                        Function<T, String> map) {
+        list.stream().filter(filter).map(map).forEach(System.out::println);
     }
 }
