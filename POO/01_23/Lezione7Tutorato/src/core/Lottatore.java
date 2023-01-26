@@ -25,8 +25,6 @@ public class Lottatore extends Player {
             this.difesa = difesaTot;
             this.numeroUccisioni = 0;
 
-            two = null;
-
             return true;
         }
     }
