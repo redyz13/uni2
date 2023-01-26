@@ -1,0 +1,3 @@
+Lottatore{puntiVita=20, attacco=80, difesa=30, numeroUccisioni=0}
+Mago{livelloMagia=50, puntiVita=10, attacco=20, difesa=30, numeroUccisioni=0}
+LottatoreVolante{puntiVita=60, attacco=80, difesa=10, numeroUccisioni=0}
