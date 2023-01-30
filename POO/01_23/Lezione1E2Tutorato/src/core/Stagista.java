@@ -19,7 +19,7 @@ public class Stagista extends Dipendente {
 
     @Override
     public String toString() {
-        return "Stagisti{" +
+        return "Stagista{" +
                 "supervisore=" + supervisore +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +

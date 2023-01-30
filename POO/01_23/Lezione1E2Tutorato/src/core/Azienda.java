@@ -1,11 +1,21 @@
 package core;
 
+import interfacce.FileManager;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Azienda {
+public class Azienda implements FileManager {
     private String nome, indirizzo;
     private ArrayList<Dipendente> listaDipendenti;
+
+    public Azienda(String nome, String indirizzo) {
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        listaDipendenti = new ArrayList<>();
+    }
 
     public String getNome() {
         return nome;
@@ -54,5 +64,34 @@ public class Azienda {
                 ", indirizzo='" + indirizzo + '\'' +
                 ", listaDipendenti=" + listaDipendenti +
                 '}';
+    }
+
+    @Override
+    public void readLavoratori(String filename) {
+        try (Scanner sc = new Scanner(new FileReader(filename))) {
+            while (sc.hasNext()) {
+                sc.next();
+                String nome = sc.next();
+                String cognome = sc.next();
+                int ID = Integer.parseInt(sc.next());
+                double salario = Double.parseDouble(sc.next());
+
+                Dipendente d = new Dipendente(nome, cognome, ID, salario);
+                listaDipendenti.add(d);
+
+                sc.nextLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void saveLavoratori(String filename) {
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(filename)))) {
+            listaDipendenti.forEach(pw::println);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

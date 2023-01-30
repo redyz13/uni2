@@ -1,0 +1,2 @@
+Dipendente: nome0 cognome0 0 250.0
+Dipendente: nome1 cognome1 1 250.0

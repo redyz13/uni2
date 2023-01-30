@@ -58,11 +58,6 @@ public class Dipendente {
 
     @Override
     public String toString() {
-        return "core.Dipendente{" +
-                "nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", ID=" + ID +
-                ", salario=" + salario +
-                '}';
+        return "Dipendente: " + nome + " " + cognome  + " " + ID + " " + salario;
     }
 }

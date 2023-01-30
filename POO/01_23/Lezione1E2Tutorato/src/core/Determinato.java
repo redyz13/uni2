@@ -21,7 +21,7 @@ public class Determinato extends Dipendente {
 
     @Override
     public String toString() {
-        return "core.Determinati{" +
+        return "Determinato{" +
                 "dataFineContratto=" + dataFineContratto +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +

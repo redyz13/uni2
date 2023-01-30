@@ -24,9 +24,8 @@ public class Indeterminato extends Dipendente {
 
     @Override
     public String toString() {
-        return "Indeterminati{" +
-                "BONUS=" + BONUS +
-                ", qualifica='" + qualifica + '\'' +
+        return "Indeterminato{" +
+                "qualifica='" + qualifica + '\'' +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", ID=" + ID +
