@@ -13,7 +13,6 @@ import java.util.function.Predicate;
 public class GUI extends JFrame {
     private ArrayList<Malware> malwareList;
 
-
     public GUI(String title) throws HeadlessException {
         super(title);
         setSize(800, 300);

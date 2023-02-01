@@ -15,11 +15,11 @@ public class Trojan extends Malware implements MaliciousActions, MalwareActions 
         elencoAppDaInstallare = new ArrayList<>();
     }
 
-    public ArrayList<Malware> getAppDaInstallare() {
+    public ArrayList<Malware> getElencoAppDaInstallare() {
         return elencoAppDaInstallare;
     }
 
-    public void setAppDaInstallare(ArrayList<Malware> elencoAppDaInstallare) {
+    public void setElencoAppDaInstallare(ArrayList<Malware> elencoAppDaInstallare) {
         this.elencoAppDaInstallare = elencoAppDaInstallare;
     }
 
@@ -46,14 +46,6 @@ public class Trojan extends Malware implements MaliciousActions, MalwareActions 
             return true;
         else
             throw new MalwareException();
-    }
-
-    public ArrayList<Malware> getElencoAppDaInstallare() {
-        return elencoAppDaInstallare;
-    }
-
-    public void setElencoAppDaInstallare(ArrayList<Malware> elencoAppDaInstallare) {
-        this.elencoAppDaInstallare = elencoAppDaInstallare;
     }
 
     @Override
