@@ -1,11 +1,9 @@
 package core;
 
-import interfacce.MaliciousActions;
-
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Botnet extends Malware implements MaliciousActions {
+public class Botnet extends Malware {
     private ArrayList<String> elencoIndirizziIp;
 
     public Botnet(String nome, GregorianCalendar dataRilascio, int livelloPericolosita) {

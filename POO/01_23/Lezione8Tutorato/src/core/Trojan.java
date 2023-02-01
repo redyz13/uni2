@@ -1,13 +1,12 @@
 package core;
 
 import eccezioni.MalwareException;
-import interfacce.MaliciousActions;
 import interfacce.MalwareActions;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Trojan extends Malware implements MaliciousActions, MalwareActions {
+public class Trojan extends Malware implements MalwareActions {
     private ArrayList<Malware> elencoAppDaInstallare;
 
     public Trojan(String nome, GregorianCalendar dataRilascio, int livelloPericolosita) {
