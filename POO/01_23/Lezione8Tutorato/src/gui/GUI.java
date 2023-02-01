@@ -42,11 +42,6 @@ public class GUI extends JFrame {
             System.out.println("Stampa ordinata di tutti i malware in base alla loro data di rilascio");
             printList(malwareList, m -> true, Comparator.comparing(Malware::getDataRilascio));
         });
-//        printList(malwareList, m -> true, (m1, m2) -> {
-//            if (m1.getDataRilascio() == m2.getDataRilascio())
-//                return 0;
-//            return m1.getDataRilascio().compareTo(m2.getDataRilascio());
-//        });
 
         buttonLivello.addActionListener(e -> {
             System.out.println("\nStampa di tutti i malware con un certo livello di pericolosità");
