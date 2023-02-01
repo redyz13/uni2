@@ -1,0 +1,6 @@
+Pacco{codice=0, descrizione='Desc0', tipo=Piccolo, dataArrivoMagazzino=2023/12/11}
+Pacco{codice=1, descrizione='Desc1', tipo=Piccolo, dataArrivoMagazzino=2023/12/10}
+Pacco{codice=2, descrizione='Desc2', tipo=Medio, dataArrivoMagazzino=2023/12/9}
+Pacco{codice=3, descrizione='Desc3', tipo=Medio, dataArrivoMagazzino=2023/12/12}
+Pacco{codice=4, descrizione='Desc4', tipo=Grande, dataArrivoMagazzino=2023/12/12}
+Pacco{codice=5, descrizione='Desc5', tipo=Grande, dataArrivoMagazzino=2023/12/18}
