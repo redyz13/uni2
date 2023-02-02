@@ -1,0 +1,10 @@
+Cavaliere{IDCavalaliere=0, ID=0, tipoPersonaggio='0', energia=188.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Cavaliere{IDCavalaliere=1, ID=1, tipoPersonaggio='1', energia=168.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Cavaliere{IDCavalaliere=2, ID=2, tipoPersonaggio='2', energia=25.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Cavaliere{IDCavalaliere=3, ID=3, tipoPersonaggio='3', energia=160.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Cavaliere{IDCavalaliere=4, ID=4, tipoPersonaggio='4', energia=143.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Orco{IDOrco=0, ID=5, tipoPersonaggio='5', energia=235.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Orco{IDOrco=1, ID=6, tipoPersonaggio='6', energia=231.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Orco{IDOrco=2, ID=7, tipoPersonaggio='7', energia=183.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Orco{IDOrco=3, ID=8, tipoPersonaggio='8', energia=119.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
+Orco{IDOrco=4, ID=9, tipoPersonaggio='9', energia=79.0, posizioneIniziale=Posizione{avanti=0, indietro=0, rotazione=0}, posizione=Posizione{avanti=0, indietro=0, rotazione=0}}
