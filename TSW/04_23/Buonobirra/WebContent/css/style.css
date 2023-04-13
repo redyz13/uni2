@@ -1,0 +1,10 @@
+body {
+  background-color: bisque;
+  text-align: center;
+  font-size: 150%;
+}
+
+#listaBirre {
+  display: inline-block;
+  text-align: left;
+}
