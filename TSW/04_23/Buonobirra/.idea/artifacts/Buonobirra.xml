@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Buonobirra">
+    <output-path>$PROJECT_DIR$/build//artifacts/</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Buonobirra/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Buonobirra" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
