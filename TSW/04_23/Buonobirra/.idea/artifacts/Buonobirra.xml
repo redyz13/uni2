@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="Buonobirra">
-    <output-path>$PROJECT_DIR$/build//artifacts/</output-path>
+    <output-path>$PROJECT_DIR$/build/artifacts</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="Buonobirra/web/Web" />
       <element id="directory" name="WEB-INF">
